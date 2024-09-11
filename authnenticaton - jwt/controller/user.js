@@ -13,10 +13,10 @@ async function handleSignUp(req, res) {
             email,
             password: hashedPassword
         });
-        return res.render("login");
+        return res.status(200).render("login");
     } catch (error) {
         console.error("Error during signup:", error);
-        return res.render('signup', { error: 'An error occurred during signup' });
+        return res.status(400).render('signup', { error: 'An error occurred during signup' });
     }
 }
 async function handleLogin(req, res) {
@@ -31,7 +31,7 @@ async function handleLogin(req, res) {
 
         if (!user) {
             console.log("No user found with this email");
-            return res.render('login', {
+            return res.status(400).render('login', {
                 error: "Invalid username or password"
             });
         }
@@ -44,7 +44,7 @@ async function handleLogin(req, res) {
 
         if (!isPasswordMatch) {
             console.log("Password does not match");
-            return res.render('login', {
+            return res.status(400).render('login', {
                 error: "Invalid username or password"
             });
         }
@@ -55,10 +55,10 @@ async function handleLogin(req, res) {
         res.cookie('uid', token);
 
        
-        return res.render("home");
+        return res.status(200).render("home");
     } catch (error) {
         console.error("Error during login:", error);
-        return res.render('login', { error: 'An error occurred during login' });
+        return res.status(400).render('login', { error: 'An error occurred during login' });
     }
 }
 

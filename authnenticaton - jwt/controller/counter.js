@@ -6,7 +6,7 @@ async function handleCounter(req,res){
         last_name:body.last_name,
         age:body.age
 })
-    return res.render("home",{
+    return res.status(200).render("home",{
         body:body
     })
 }
