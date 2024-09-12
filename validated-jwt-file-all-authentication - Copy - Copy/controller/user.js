@@ -13,6 +13,7 @@ const validateSignUp = [
     .isLength({ min: 5 }).withMessage('First name must be at least 5 characters long')
     .matches(/^[a-zA-Z]/).withMessage('First name must not start with a special character'),
     body('email').isEmail().withMessage('Please provide a valid email'),
+  
     body('password')
         .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
         .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')
@@ -63,6 +64,9 @@ async function handleSignUp(req, res) {
 
         return res.render("login");
     } catch (error) {
+        if (error.code === 11000 && error.keyPattern.email) {
+            return res.status(400).render( 'signup',{error: 'Email already exists' });
+        }
         console.error("Error during signup:", error);
         return res.render('signup', { error: 'An error occurred during signup' });
     }
@@ -74,14 +78,6 @@ async function handleSignUp(req, res) {
 
 
 // ___________________________________________________________________________
-// file upload
-
-
-
-
-
-
-
 
 
 
@@ -120,10 +116,26 @@ async function handleLogin(req, res) {
     }
 }
 
+
+
+
+
+
+// delete--------------------------------------------------
+
+
+
+
+
+
+
+
+
 module.exports = {
     handleSignUp,
     handleLogin,
     validateSignUp,
     validateLogin,
-  upload
+     upload,
+    
 };

@@ -6,7 +6,8 @@ const detailSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,
@@ -17,12 +18,13 @@ const detailSchema=new mongoose.Schema({
     },
     filepath:{
         type:String
-    }
-
+    } 
 },
-{timeStamps:true}
+
+{timestamps:true}
 )
 const userDetails=mongoose.model("userDetails",detailSchema)
+userDetails.syncIndexes();
 module.exports={
     userDetails
 }

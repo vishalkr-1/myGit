@@ -7,10 +7,11 @@ router.post('/signup',upload.single('uploadFile'),validateSignUp,handleSignUp)
 router.post('/login',validateLogin,handleLogin)
 
 
-
+// delete and restore
 
 
 
 module.exports={
     signUpRouter:router,
+
 }
