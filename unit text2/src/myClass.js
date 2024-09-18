@@ -1,3 +1,6 @@
+
+import {XMLHttpRequest} from 'xmlhttprequest'
+XMLHttpRequest
 export class myClass{
     constructor(){
         console.log("initiate")
@@ -26,5 +29,22 @@ export class myClass{
         return result*2
     })
   }
+  xhrFn() {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    resolve(JSON.parse(xhr.responseText));
+                } else {
+                    reject(xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    });
+}
+
 }
 

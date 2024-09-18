@@ -5,7 +5,7 @@ import sinon from 'sinon/lib/sinon.js';
 // import chai from 'chai';
 // import chaiAsPromised from 'chai-as-promised';
 // chai.use(chaiAsPromised);
-
+import nock from 'nock';
 const myObj = new myClass();
 
 describe.skip("Test code", function() {
@@ -56,3 +56,24 @@ describe.skip("Test for promise", function() {
       return expect(myObj.testPromise()).to.eventually.equal(62)
     });
 })
+
+
+
+describe("xhr for test", function() {
+    it("mock and xhr test case", function(done) {
+        this.timeout(0);
+
+        // Use the correct URL path and method in nock
+        const scope = nock("https://jsonplaceholder.typicode.com")
+            .post("/posts")
+            .reply(200, { id: 123 });
+
+        myObj.xhrFn().then(function(result) {
+            expect(result).to.deep.equal({ id: 123 });  // Use deep.equal for object comparison
+            done();
+        }).catch(error => {
+            done(new Error("test case failed"));
+        });
+    });
+
+});
