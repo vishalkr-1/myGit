@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>fill details</h1>
+    <form action="/api/counter" method="POST">
+        <label for="">first_name</label>
+        <input type="text" name="first_name" id="">
+        <label for="">last_name</label>
+        <input type="text" name="last_name" id="">
+        <label for="">age</label>
+        <input type="number" name="age" id="">
+        <input type="submit" value="submit">
+    </form>
+    <% if (locals.body) { %>
+        <p>first_name :<%= body.first_name %></p>
+        <p>last_name :<%= body.last_name %></p>
+        <p>age :<%= body.age %></p>
+        
+   <% } %>
+</body>
+</html>
