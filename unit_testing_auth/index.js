@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.set("view engine","ejs")
 // app.set("views",path.resolve("./view"))
 app.set("views",path.resolve('./view'))
-app.use("/",serverRouter)
+app.use("/server",serverRouter)
 // server
 app.use("/api",restrictToLoggedInUserOnly,router)
 // router =rotes folder ye router html form sa connected hai agar data form sa yahi par aakar jaata hai
@@ -42,7 +42,7 @@ app.use("/regain",restoreUserRouter)
 
 
 
- module.exports=app.listen(PORT,()=>{
+exports=app.listen(PORT,()=>{
     return console.log(`server is connected at port ${PORT}`)
 })
 
